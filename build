@@ -1,13 +1,13 @@
 #!/bin/sh
 # Based on https://hackernoon.com/using-yarn-with-docker-c116ad289d56
 if docker-compose build; then
-  docker run --rm --entrypoint cat webpackerdockerexample_rails /tmp/yarn.lock > /tmp/yarn.lock
+  docker-compose run --rm --entrypoint cat rails /tmp/yarn.lock > /tmp/yarn.lock
   if ! diff -q yarn.lock /tmp/yarn.lock > /dev/null  2>&1; then
     echo "We have a new yarn.lock"
     cp /tmp/yarn.lock yarn.lock
   fi
 
-  docker run --rm --entrypoint cat webpackerdockerexample_rails /tmp/Gemfile.lock > /tmp/Gemfile.lock
+  docker-compose run --rm --entrypoint cat rails /tmp/Gemfile.lock > /tmp/Gemfile.lock
   if ! diff -q Gemfile.lock /tmp/Gemfile.lock > /dev/null  2>&1; then
     echo "We have a new Gemfile.lock"
     cp /tmp/Gemfile.lock Gemfile.lock
