@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  rails:
+    container_name: example-rails
+    build: .
+    volumes:
+      - .:/example-rails
+    ports:
+      - 3000
