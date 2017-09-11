@@ -8,12 +8,19 @@ RUN apt-get update && apt-get install apt-transport-https \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV APP_HOME /example-rails
+ENV APP_HOME /example-rails/
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 COPY Gemfile* $APP_HOME
 RUN bundle install
+
+COPY package.json yarn.lock $APP_HOME
+RUN yarn install
+
+RUN cp *.lock /tmp
+COPY . $APP_HOME
+RUN cp /tmp/*.lock ./
 
 COPY . $APP_HOME
 
