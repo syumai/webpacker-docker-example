@@ -20,7 +20,7 @@ RUN yarn install
 
 RUN cp *.lock /tmp
 COPY . $APP_HOME
-RUN cp /tmp/*.lock ./
+RUN cp /tmp/*.lock .
 
 COPY . $APP_HOME
 
